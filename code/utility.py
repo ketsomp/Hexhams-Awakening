@@ -17,9 +17,11 @@ def import_folder(path):
     for a,b,img_files in walk(path):
         for image in img_files:
             full_path = path + '/' + image
-            image_surf = pygame.image.load(full_path).convert_alpha()
-            surface_list.append(image_surf)
+            if not image.startswith('.DS'): # to prevent those blasted .DS_Store files from being parsed
+                image_surf = pygame.image.load(full_path).convert_alpha()
+                surface_list.append(image_surf)
 
     return surface_list
 
 #print(import_csv_layout('../graphics/maps/map_FloorBlocks.csv'))
+

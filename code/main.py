@@ -8,6 +8,7 @@ class Game:
     def __init__(self):
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption("Hexham's Awakening")
+        pygame.display.set_icon(pygame.image.load('../graphics/logo/ha_logo.png').convert_alpha())
         self.clock = pygame.time.Clock()
 
         self.level=Level()
