@@ -3,7 +3,7 @@ from settings import *
 from utility import import_folder
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self,pos,groups,obstacle_sprites,create_attack,destroy_attack):
+    def __init__(self,pos,groups,obstacle_sprites,create_attack,destroy_attack,create_proj):
         super().__init__(groups)
         self.image=pygame.image.load('../graphics/test/player.png').convert_alpha()
         self.rect=self.image.get_rect(topleft=pos)
@@ -28,10 +28,19 @@ class Player(pygame.sprite.Sprite):
         self.weapon=list(weapon_data.keys())[self.weapon_index]
         self.can_switch_weapon=True
         self.weapon_switch_cd=None
+
         self.switch_duration_cd=200
 
+        # projectiles
+        self.create_proj=create_proj
+        self.proj_index=0
+        self.proj=list(proj_data.keys())[self.proj_index]
+        self.can_switch_proj=True
+        self.proj_switch_cd=None
+
+
         #stats
-        self.stats = {'health': 100,'energy':60,'attack': 10,'magic': 4,'speed': 6}
+        self.stats = {'health': 100,'energy':60,'attack': 10,'power': 4,'speed': 6}
         self.health=self.stats['health']
         self.energy=self.stats['energy']
         self.xp=696
@@ -77,10 +86,16 @@ class Player(pygame.sprite.Sprite):
                 self.attack_duration=pygame.time.get_ticks()
                 self.create_attack()
             
-            #crossbow
+            # proj input
             if keys[pygame.K_RETURN]:
                 self.attacking=True
                 self.attack_duration=pygame.time.get_ticks()
+
+                style=list(proj_data.keys())[self.proj_index]
+                strength=list(proj_data.values())[self.proj_index]['strength']+self.stats['power']
+                count=list(proj_data.values())[self.proj_index]['count']
+
+                self.create_proj(style,strength,count)
 
             if keys[pygame.K_q] and self.can_switch_weapon:
                 self.can_switch_weapon=False
@@ -92,6 +107,17 @@ class Player(pygame.sprite.Sprite):
                 else:
                     self.weapon_index=0
                 self.weapon=list(weapon_data.keys())[self.weapon_index]
+
+            if keys[pygame.K_e] and self.can_switch_proj:
+                self.can_switch_proj=False
+                self.proj_switch_cd=pygame.time.get_ticks()
+
+                # make sure cycle between projectiles instead of going out of range
+                if self.proj_index<len(list(proj_data.keys()))-1:
+                    self.proj_index+=1
+                else:
+                    self.proj_index=0
+                self.proj=list(weapon_data.keys())[self.proj_index]
 
     def get_status(self):
         # idle
@@ -146,6 +172,11 @@ class Player(pygame.sprite.Sprite):
         if not self.can_switch_weapon:
             if current_time-self.weapon_switch_cd>=self.switch_duration_cd:
                 self.can_switch_weapon=True
+
+        # projectile switch cooldown
+        if not self.can_switch_proj:
+            if current_time-self.proj_switch_cd>=self.switch_duration_cd:
+                self.can_switch_proj=True
 
     def animate(self):
         animation=self.animations[self.status]

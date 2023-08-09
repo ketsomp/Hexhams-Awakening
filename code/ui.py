@@ -18,6 +18,13 @@ class UI:
             weapon=pygame.image.load(path).convert_alpha()
             self.weapon_graphics.append(weapon)
 
+        # convert projectile dict
+        self.proj_graphics=[]
+        for proj in proj_data.values():
+            path=proj['graphic']
+            proj=pygame.image.load(path).convert_alpha()
+            self.proj_graphics.append(proj)
+
     def display_bar(self,current,max_amount,bg_rect,color):
         # draw bg
         pygame.draw.rect(self.display_surface,UI_BG_COLOR,bg_rect)
@@ -59,6 +66,12 @@ class UI:
 
         self.display_surface.blit(weapon_surf,weapon_rect)
 
+    def proj_overlay(self,proj_index,has_switched):
+        bg_rect=self.hotbox(80,635,has_switched) 
+        proj_surf=self.proj_graphics[proj_index]
+        proj_rect=proj_surf.get_rect(center=bg_rect.center)
+
+        self.display_surface.blit(proj_surf,proj_rect)
 
     def display(self,player):
         # display bars by calling above method
@@ -68,4 +81,4 @@ class UI:
         self.display_xp(player.xp)
 
         self.weapon_overlay(player.weapon_index,not player.can_switch_weapon)
-      #  self.hotbox(80,635) # projectile hotbox
+        self.proj_overlay(player.proj_index,not player.can_switch_proj)
