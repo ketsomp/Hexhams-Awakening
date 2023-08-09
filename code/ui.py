@@ -11,6 +11,13 @@ class UI:
         self.health_bar_rect=pygame.Rect(10,10,HEALTH_BAR_WIDTH,BAR_HEIGHT)
         self.energy_bar_rect=pygame.Rect(10,35,ENERGY_BAR_WIDTH,BAR_HEIGHT) # (l,t,b,h)
 
+        # convert weapon dict
+        self.weapon_graphics=[]
+        for weapon in weapon_data.values():
+            path=weapon['graphic']
+            weapon=pygame.image.load(path).convert_alpha()
+            self.weapon_graphics.append(weapon)
+
     def display_bar(self,current,max_amount,bg_rect,color):
         # draw bg
         pygame.draw.rect(self.display_surface,UI_BG_COLOR,bg_rect)
@@ -23,7 +30,7 @@ class UI:
 
         # drawing bar
         pygame.draw.rect(self.display_surface,color,current_rect)
-        pygame.draw.rect(self.display_surface,UI_BG_COLOR,bg_rect,3) # border around red hp bar, 3 makes box outlined
+        pygame.draw.rect(self.display_surface,UI_BG_COLOR,bg_rect,3) # border around red hp bar, 4th parameter makes box outlined
 
     def display_xp(self,xp):
         xp_offset=20
@@ -34,6 +41,24 @@ class UI:
 
         pygame.draw.rect(self.display_surface,XP_COLOR,text_rect.inflate(20,20))
         self.display_surface.blit(text_surf,text_rect)
+        pygame.draw.rect(self.display_surface,UI_BORDER_COLOR,text_rect.inflate(20,20),3)
+
+    def hotbox(self,left,top,has_switched):
+        bg_rect=pygame.Rect(left,top,HOTBOX_SIZE,HOTBOX_SIZE)
+        pygame.draw.rect(self.display_surface,UI_BG_COLOR,bg_rect)
+        if has_switched:
+            pygame.draw.rect(self.display_surface,UI_BORDER_COLOR_ACTIVE,bg_rect,3)
+        else:
+            pygame.draw.rect(self.display_surface,UI_BG_COLOR,bg_rect,3)
+        return bg_rect
+
+    def weapon_overlay(self,weapon_index,has_switched):
+        bg_rect=self.hotbox(10,630,has_switched) 
+        weapon_surf=self.weapon_graphics[weapon_index]
+        weapon_rect=weapon_surf.get_rect(center=bg_rect.center)
+
+        self.display_surface.blit(weapon_surf,weapon_rect)
+
 
     def display(self,player):
         # display bars by calling above method
@@ -41,3 +66,6 @@ class UI:
         self.display_bar(player.energy,player.stats['energy'],self.energy_bar_rect,ENERGY_COLOR)
 
         self.display_xp(player.xp)
+
+        self.weapon_overlay(player.weapon_index,not player.can_switch_weapon)
+      #  self.hotbox(80,635) # projectile hotbox

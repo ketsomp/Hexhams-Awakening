@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
         self.destroy_attack=destroy_attack
         self.weapon_index=0 # id of weapon
         self.weapon=list(weapon_data.keys())[self.weapon_index]
-        self.can_switch_sweapon=True
+        self.can_switch_weapon=True
         self.weapon_switch_cd=None
         self.switch_duration_cd=200
 
@@ -82,8 +82,8 @@ class Player(pygame.sprite.Sprite):
                 self.attacking=True
                 self.attack_duration=pygame.time.get_ticks()
 
-            if keys[pygame.K_q] and self.can_switch_sweapon:
-                self.can_switch_sweapon=False
+            if keys[pygame.K_q] and self.can_switch_weapon:
+                self.can_switch_weapon=False
                 self.weapon_switch_cd=pygame.time.get_ticks()
 
                 # make sure cycle between weapons instead of going out of range
@@ -143,9 +143,9 @@ class Player(pygame.sprite.Sprite):
                 self.destroy_attack() 
         
         # weapon switch cooldown
-        if not self.can_switch_sweapon:
+        if not self.can_switch_weapon:
             if current_time-self.weapon_switch_cd>=self.switch_duration_cd:
-                self.can_switch_sweapon=True
+                self.can_switch_weapon=True
 
     def animate(self):
         animation=self.animations[self.status]
