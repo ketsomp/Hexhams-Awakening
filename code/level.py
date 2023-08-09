@@ -6,6 +6,7 @@ from debug import debug
 from utility import import_csv_layout,import_folder
 from random import choice
 from weapon import Weapon
+from ui import UI
 
 class Level:
     def __init__(self):
@@ -20,6 +21,9 @@ class Level:
 
         #sprite setup
         self.create_map()
+
+        # ui
+        self.ui=UI()
 
     def create_map(self):
         #        # col - current tile being iterated over
