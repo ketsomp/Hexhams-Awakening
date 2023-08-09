@@ -27,12 +27,12 @@ class UI:
 
     def display_xp(self,xp):
         xp_offset=20
-        text_surf=self.font.render(str(int(xp)),False,XP_COLOR)
+        text_surf=self.font.render(str(int(xp)),False,BLACK)
         x=self.display_surface.get_size()[0]-xp_offset
         y=self.display_surface.get_size()[1]-xp_offset
         text_rect=text_surf.get_rect(bottomright=(x,y))
 
-        pygame.draw.rect(self.display_surface,UI_BG_COLOR,text_rect.inflate(20,20))
+        pygame.draw.rect(self.display_surface,XP_COLOR,text_rect.inflate(20,20))
         self.display_surface.blit(text_surf,text_rect)
 
     def display(self,player):

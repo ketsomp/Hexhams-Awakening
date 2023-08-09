@@ -23,6 +23,7 @@ TEXT_COLOR = '#EEEEEE'
 HEALTH_COLOR = 'red'
 ENERGY_COLOR = 'blue'
 UI_BORDER_COLOR_ACTIVE = 'gold'
+XP_COLOR=(109, 232, 102)
 
 # weapons 
 weapon_data = {
