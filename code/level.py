@@ -66,7 +66,11 @@ class Level:
                                                     self.create_attack,self.destroy_attack,
                                                     self.create_proj)
                             else:
-                                Enemy('skeleton',(x,y),[self.visible_sprites])
+                                if col=='390': monster_name='flying_eye'
+                                elif col=='391': monster_name='mushroom'
+                                elif col=='392': monster_name='goblin'
+                                else: monster_name='skeleton'
+                                Enemy(monster_name,(x,y),[self.visible_sprites])
 
 
     def create_attack(self):

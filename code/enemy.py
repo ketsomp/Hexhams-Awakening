@@ -15,7 +15,7 @@ class Enemy(Entity):
         self.rect=self.image.get_rect(topleft=pos)
 
     def import_graphics(self,name):
-        self.animations={'idle':[],'move':[],'attack':[]} # 4:22:46
+        self.animations={'idle':[],'move':[],'attack':[]}
         main_path=f"../graphics/monsters/{name}/"
         for animation in self.animations.keys():
             self.animations[animation]=import_folder(main_path+animation)
