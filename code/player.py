@@ -44,6 +44,11 @@ class Player(Entity):
         self.xp=696
         self.speed=self.stats['speed']
 
+        # damage timer
+        self.vulnerable=True
+        self.hurt_time=None
+        self.invulnerability_duration=500
+
         self.obstacle_sprites=obstacle_sprites
 
     def import_player_assets(self):
@@ -151,6 +156,11 @@ class Player(Entity):
             if current_time-self.proj_switch_cd>=self.switch_duration_cd:
                 self.can_switch_proj=True
 
+        # player spawn time cd
+        if not self.vulnerable:
+            if current_time-self.hurt_time>=self.invulnerability_duration:
+                self.vulnerable=True
+
     def animate(self):
         animation=self.animations[self.status]
 
@@ -162,6 +172,13 @@ class Player(Entity):
         # set image
         self.image=animation[int(self.frame_index)]
         self.rect=self.image.get_rect(center=self.hitbox.center)
+
+        # flicker when hit
+        if not self.vulnerable:
+            alpha=self.wave_value() #flicker
+            self.image.set_alpha(alpha)
+        else:
+            self.image.set_alpha(255)
    
     def get_weapon_damage(self):
         base_damage=self.stats['attack']

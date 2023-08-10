@@ -2,10 +2,9 @@ import pygame
 from settings import *
 from entity import Entity
 from utility import *
-import math
 
 class Enemy(Entity):
-    def __init__(self,monster_name,pos,groups,obstacle_sprites):
+    def __init__(self,monster_name,pos,groups,obstacle_sprites,damage_player):
         # general
         super().__init__(groups)
         self.sprite_type='enemy'
@@ -32,6 +31,7 @@ class Enemy(Entity):
         self.can_attack=True
         self.attack_time=None
         self.attack_cooldown=400
+        self.damage_play=damage_player
 
         # spawn protection
         self.vulnerable=True
@@ -73,8 +73,8 @@ class Enemy(Entity):
 
     def actions(self,player):
         if self.status=='attack':
-            print('attack')
             self.attack_time=pygame.time.get_ticks()
+            self.damage_play(self.attack_damage,self.attack_type)
         elif self.status=='move':
             self.direction=self.get_player_dist_dir(player)[1] # get direction from method
         else:
