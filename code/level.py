@@ -90,7 +90,7 @@ class Level:
 
     def create_proj(self,item,strength,count):
         if item=='heal':
-            self.magic_player.heal()
+            self.magic_player.heal(self.player,strength,count,[self.visible_sprites])
         if item=='arrow':
             print('arrow')
 
