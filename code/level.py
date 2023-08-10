@@ -89,12 +89,23 @@ class Level:
             self.current_attack.kill()
         self.current_attack=None
 
+    def player_attack_logic(self):
+        if self.attack_sprites:
+            for attack_sprite in self.attack_sprites:
+                collision_sprites=pygame.sprite.spritecollide(attack_sprite,self.attackable_sprites,False) # if sprite collides with any sprite in the group
+                if collision_sprites:
+                    for target_sprite in collision_sprites:
+                        if target_sprite.sprite_type=='grass':
+                            target_sprite.kill()
+                        elif target_sprite.sprite_type=='enemy':
+                            target_sprite.get_damage(self.player,attack_sprite.sprite_type)
 
     def run(self):
         #update and draw game
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
         self.visible_sprites.enemy_update(self.player)
+        self.player_attack_logic()
         self.ui.display(self.player)
 
 class YSortCameraGroup(pygame.sprite.Group):

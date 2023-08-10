@@ -163,6 +163,11 @@ class Player(Entity):
         self.image=animation[int(self.frame_index)]
         self.rect=self.image.get_rect(center=self.hitbox.center)
     
+    def get_weapon_damage(self):
+        base_damage=self.stats['attack']
+        weapon_damage=weapon_data[self.weapon]['damage']
+        return base_damage+weapon_damage
+
     def update(self):
         self.input()
         self.cooldowns()
