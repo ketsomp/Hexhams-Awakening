@@ -19,6 +19,8 @@ class Level:
 
         #attack sprites
         self.current_attack=None
+        self.attack_sprites=pygame.sprite.Group() # for weapons and projectiles
+        self.attackable_sprites=pygame.sprite.Group() # for attackable objects, eg. monsters, grass
 
         #sprite setup
         self.create_map()
@@ -54,7 +56,7 @@ class Level:
                             Tile((x,y),[self.obstacle_sprites],'invisible')
                         if style=='grass':
                             rand_grass_image=choice(graphics['grass'])
-                            Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'grass',rand_grass_image)
+                            Tile((x,y),[self.visible_sprites,self.obstacle_sprites,self.attackable_sprites],'grass',rand_grass_image)
                         if style=='object':
                             surf=graphics['objects'][int(col)]
                             Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'object',surf)
@@ -65,16 +67,19 @@ class Level:
                                                     [self.visible_sprites],self.obstacle_sprites,
                                                     self.create_attack,self.destroy_attack,
                                                     self.create_proj)
-                            else:
+                            else: # check which enemy the entity that isnt player is
                                 if col=='390': monster_name='flying_eye'
                                 elif col=='391': monster_name='mushroom'
                                 elif col=='392': monster_name='goblin'
                                 else: monster_name='skeleton'
-                                Enemy(monster_name,(x,y),[self.visible_sprites],self.obstacle_sprites)
+                                Enemy(monster_name,
+                                      (x,y),
+                                      [self.visible_sprites,self.attackable_sprites],
+                                      self.obstacle_sprites)
 
 
     def create_attack(self):
-        self.current_attack=Weapon(self.player,[self.visible_sprites])
+        self.current_attack=Weapon(self.player,[self.visible_sprites,self.attack_sprites])
 
     def create_proj(self,style,strength,count):
         print(style,strength,count)
