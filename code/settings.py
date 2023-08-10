@@ -36,7 +36,7 @@ weapon_data = {
 # projectiles
 proj_data = {
     'rock': {'strength': 5,'count': 20,'graphic':'../graphics/projectiles/rock.png'},
-    'arrow' : {'strength': 20,'count': 10,'graphic':'../graphics/projectiles/arrow.png'}}
+    'hp_potion' : {'strength': 20,'count': 10,'graphic':'../graphics/projectiles/hp_potion.png'}}
 
 # enemies
 monster_data = {
