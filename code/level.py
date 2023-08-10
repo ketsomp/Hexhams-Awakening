@@ -9,6 +9,7 @@ from weapon import Weapon
 from ui import UI
 from enemy import Enemy
 from particles import AnimationPlayer
+from projectile import ItemPlayer
 
 class Level:
     def __init__(self):
@@ -31,6 +32,7 @@ class Level:
 
         # particles
         self.animation_player=AnimationPlayer()
+        self.magic_player=ItemPlayer(self.animation_player)
 
     def create_map(self):
         #        # col - current tile being iterated over
@@ -86,8 +88,11 @@ class Level:
     def create_attack(self):
         self.current_attack=Weapon(self.player,[self.visible_sprites,self.attack_sprites])
 
-    def create_proj(self,style,strength,count):
-        print(style,strength,count)
+    def create_proj(self,item,strength,count):
+        if item=='heal':
+            self.magic_player.heal()
+        if item=='arrow':
+            print('arrow')
 
     def destroy_attack(self):
         if self.current_attack:
