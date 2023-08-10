@@ -80,7 +80,8 @@ class Level:
                                       (x,y),
                                       [self.visible_sprites,self.attackable_sprites],
                                       self.obstacle_sprites,
-                                      self.damage_player)
+                                      self.damage_player,
+                                      self.trigger_death_particles)
 
     def create_attack(self):
         self.current_attack=Weapon(self.player,[self.visible_sprites,self.attack_sprites])
@@ -115,6 +116,9 @@ class Level:
             self.player.hurt_time=pygame.time.get_ticks()
             #self.animation_player.create_particles(attack_type,self.player.rect.center,self.visible_sprites)
             #for animation effect created by enemy attacks (unecessary with current enemy sprites)
+
+    def trigger_death_particles(self,pos,particle_type):
+        self.animation_player.create_particles(particle_type,pos,self.visible_sprites)
 
     def run(self):
         #update and draw game
