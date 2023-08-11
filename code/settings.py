@@ -25,6 +25,12 @@ ENERGY_COLOR = 'blue'
 UI_BORDER_COLOR_ACTIVE = 'gold'
 XP_COLOR=(109, 232, 102)
 
+# upgrade menu
+TEXT_COLOR_SELECTED = '#111111'
+BAR_COLOR = '#EEEEEE'
+BAR_COLOR_SELECTED = '#111111'
+UPGRADE_BG_COLOR_SELECTED = '#EEEEEE'
+
 # weapons 
 weapon_data = {
     'sword': {'cooldown': 100, 'damage': 15,'graphic':'../graphics/weapons/sword/full.png'},
@@ -40,7 +46,7 @@ proj_data = {
 
 # enemies
 monster_data = {
-    'skeleton': {'health': 300,'exp':250,'damage':40,'attack_type': 'slash', 'attack_sound':'../audio/attack/slash.wav', 'speed': 2, 'resistance': 4, 'attack_radius': 120, 'aggro_radius': 400},
-    'mushroom': {'health': 100,'exp':100,'damage':20,'attack_type': 'slash',  'attack_sound':'../audio/attack/claw.wav','speed': 2, 'resistance': 3, 'attack_radius': 80, 'aggro_radius': 360},
-    'goblin': {'health': 100,'exp':110,'damage':8,'attack_type': 'claw', 'attack_sound':'../audio/attack/fireball.wav', 'speed': 3, 'resistance': 3, 'attack_radius': 60, 'aggro_radius': 350},
-    'flying_eye': {'health': 70,'exp':120,'damage':6,'attack_type': 'thunder', 'attack_sound':'../audio/attack/slash.wav', 'speed': 4, 'resistance': 3, 'attack_radius': 50, 'aggro_radius': 300}}
+    'skeleton': {'health': 300,'xp':250,'damage':40,'attack_type': 'slash', 'attack_sound':'../audio/attack/slash.wav', 'speed': 2, 'resistance': 4, 'attack_radius': 120, 'aggro_radius': 400},
+    'mushroom': {'health': 100,'xp':100,'damage':20,'attack_type': 'slash',  'attack_sound':'../audio/attack/claw.wav','speed': 2, 'resistance': 3, 'attack_radius': 80, 'aggro_radius': 360},
+    'goblin': {'health': 100,'xp':110,'damage':8,'attack_type': 'claw', 'attack_sound':'../audio/attack/fireball.wav', 'speed': 3, 'resistance': 3, 'attack_radius': 60, 'aggro_radius': 350},
+    'flying_eye': {'health': 70,'xp':120,'damage':6,'attack_type': 'thunder', 'attack_sound':'../audio/attack/slash.wav', 'speed': 4, 'resistance': 3, 'attack_radius': 50, 'aggro_radius': 300}}
