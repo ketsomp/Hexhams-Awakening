@@ -10,6 +10,7 @@ from ui import UI
 from enemy import Enemy
 from particles import AnimationPlayer
 from projectile import ItemPlayer
+from upgrade import Upgrade
 
 class Level:
     def __init__(self):
@@ -18,6 +19,8 @@ class Level:
         #sprite groups definitions
         self.visible_sprites=YSortCameraGroup()
         self.obstacle_sprites=pygame.sprite.Group()
+
+        self.game_paused=False
 
         #attack sprites
         self.current_attack=None
@@ -29,6 +32,7 @@ class Level:
 
         # ui
         self.ui=UI()
+        self.upgrade=Upgrade(self.player)
 
         # particles
         self.animation_player=AnimationPlayer()
@@ -129,13 +133,22 @@ class Level:
     def add_xp(self,amount):
         self.player.xp+=amount
 
+    def toggle_menu(self):
+        self.game_paused=not self.game_paused
+
+
     def run(self):
-        #update and draw game
         self.visible_sprites.custom_draw(self.player)
-        self.visible_sprites.update()
-        self.visible_sprites.enemy_update(self.player)
-        self.player_attack_logic()
         self.ui.display(self.player)
+        #update and draw game
+        if self.game_paused:
+            self.upgrade.display()
+            # display upgrade menu
+        else:
+            # run game
+            self.visible_sprites.update()
+            self.visible_sprites.enemy_update(self.player)
+            self.player_attack_logic()
 
 class YSortCameraGroup(pygame.sprite.Group):
     def __init__(self):

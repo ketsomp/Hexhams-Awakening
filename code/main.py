@@ -21,6 +21,10 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit() #to prevent errors after closing display
+                if event.type==pygame.KEYDOWN:
+                    if event.key==pygame.K_TAB or event.key==pygame.K_ESCAPE:
+                        self.level.toggle_menu()
+                    print('dog')
             #graphics drawn
             self.screen.fill(BLACK)
             self.level.run()
