@@ -91,8 +91,8 @@ class Level:
     def create_proj(self,item,strength,cost):
         if item=='hp_potion':
             self.magic_player.heal(self.player,strength,cost,[self.visible_sprites])
-        if item=='arrow':
-            print('arrow')
+        if item=='knife':
+            print('knife')
 
     def destroy_attack(self):
         if self.current_attack:

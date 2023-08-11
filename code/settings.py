@@ -35,7 +35,7 @@ weapon_data = {
 
 # projectiles
 proj_data = {
-    'arrow': {'strength': 5,'cost': 20,'graphic':'../graphics/projectiles/arrow.png'},
+    'knife': {'strength': 5,'cost': 20,'graphic':'../graphics/projectiles/knife.png'},
     'hp_potion' : {'strength': 20,'cost': 10,'graphic':'../graphics/projectiles/hp_potion.png'}}
 
 # enemies
