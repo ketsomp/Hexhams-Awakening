@@ -53,6 +53,10 @@ class Player(Entity):
 
         self.obstacle_sprites=obstacle_sprites
 
+        # sfx
+        self.weapon_attack_sfx=pygame.mixer.Sound('../audio/sword.wav')
+        self.weapon_attack_sfx.set_volume(0.2)
+
     def import_player_assets(self):
         character_path='../graphics/player/'
         self.animations = {'up':[],'down':[],'left':[],'right':[],
@@ -90,6 +94,7 @@ class Player(Entity):
                 self.attacking=True
                 self.attack_duration=pygame.time.get_ticks()
                 self.create_attack()
+                self.weapon_attack_sfx.play()
             
             # proj input
             if keys[pygame.K_LSHIFT]:

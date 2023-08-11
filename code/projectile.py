@@ -5,9 +5,14 @@ from random import randint
 class ItemPlayer:
     def __init__(self,animation_player):
         self.animation_player=animation_player
+        self.sounds={
+            'heal':pygame.mixer.Sound('../audio/heal.wav'),
+            'spike':pygame.mixer.Sound('../audio/spike.wav')
+        }
 
     def heal(self,player,strength,cost,groups):
         if player.energy>=cost:
+            self.sounds['heal'].play()
             player.health+=strength
             player.energy-=cost
             if player.health>=player.stats['health']: #checking if current health exceeds max health
@@ -19,6 +24,7 @@ class ItemPlayer:
     def throw(self,player,cost,groups):
         if player.energy>=cost:
             player.energy-=cost
+            self.sounds['spike'].play()
             if player.status.split('_')[0]=='right':
                 direction=pygame.math.Vector2(1,0)
             elif player.status.split('_')[0]=='left':

@@ -12,6 +12,11 @@ class Game:
         self.clock = pygame.time.Clock()
 
         self.level=Level()
+
+        # ost
+        main_ost=pygame.mixer.Sound('../audio/ost.ogg')
+        main_ost.set_volume(0.5)
+        main_ost.play(loops=-1)
     
     def run(self):
         #game loop
