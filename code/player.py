@@ -184,6 +184,11 @@ class Player(Entity):
         base_damage=self.stats['attack']
         weapon_damage=weapon_data[self.weapon]['damage']
         return base_damage+weapon_damage
+    
+    def get_proj_damage(self):
+        base_damage=self.stats['power']
+        spike_damage=proj_data[self.proj]['strength']
+        return base_damage+spike_damage
 
     def energy_recovery(self): # constant energy recovery after casting spells
         if self.energy<self.stats['energy']:
