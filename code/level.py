@@ -92,7 +92,7 @@ class Level:
         if item=='hp_potion':
             self.magic_player.heal(self.player,strength,cost,[self.visible_sprites])
         if item=='spike':
-            self.magic_player.throw(self.player,cost,[self.visible_sprites])
+            self.magic_player.throw(self.player,cost,[self.visible_sprites,self.attack_sprites])
 
     def destroy_attack(self):
         if self.current_attack:

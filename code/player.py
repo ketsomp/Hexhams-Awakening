@@ -90,7 +90,7 @@ class Player(Entity):
                 self.create_attack()
             
             # proj input
-            if keys[pygame.K_RETURN]:
+            if keys[pygame.K_LSHIFT]:
                 self.attacking=True
                 self.attack_duration=pygame.time.get_ticks()
 
