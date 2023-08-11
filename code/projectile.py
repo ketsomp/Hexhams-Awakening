@@ -1,6 +1,5 @@
 import pygame
 from settings import *
-from particles import AnimationPlayer
 
 class ItemPlayer:
     def __init__(self,animation_player):
@@ -12,8 +11,8 @@ class ItemPlayer:
             player.energy-=cost
             if player.health>=player.stats['health']: #checking if current health exceeds max health
                 player.health=player.stats['health'] # cap at max health
-            self.animation_player.create_particles('aura',player.rect.center,groups)
-            self.animation_player.create_particles('heal',player.rect.center+pygame.math.Vector2(0,-60),groups)
+            self.animation_player.create_particles('aura',player.rect.center,groups) # aura when cast
+            self.animation_player.create_particles('heal',player.rect.center+pygame.math.Vector2(0,-60),groups) # healing thing when cast
 
 
     def shoot(self):
