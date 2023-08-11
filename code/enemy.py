@@ -19,7 +19,7 @@ class Enemy(Entity):
         self.monster_name = monster_name
         monster_info = monster_data[self.monster_name]
         self.health = monster_info['health']
-        self.xp = monster_info['exp']
+        self.xp = monster_info['xp']
         self.speed = monster_info['speed']
         self.attack_damage = monster_info['damage']
         self.resistance = monster_info['resistance']
