@@ -25,7 +25,7 @@ class Game:
                     if event.key==pygame.K_TAB or event.key==pygame.K_ESCAPE:
                         self.level.toggle_menu()
             #graphics drawn
-            self.screen.fill(BLACK)
+            self.screen.fill(WATER_COLOR)
             self.level.run()
 
             #update display
