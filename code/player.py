@@ -96,9 +96,9 @@ class Player(Entity):
 
                 style=list(proj_data.keys())[self.proj_index]
                 strength=list(proj_data.values())[self.proj_index]['strength']+self.stats['power']
-                count=list(proj_data.values())[self.proj_index]['count']
+                cost=list(proj_data.values())[self.proj_index]['cost']
 
-                self.create_proj(style,strength,count)
+                self.create_proj(style,strength,cost)
 
             if keys[pygame.K_q] and self.can_switch_weapon:
                 self.can_switch_weapon=False
