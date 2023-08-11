@@ -9,7 +9,7 @@ class AnimationPlayer:
                 # magic
                 'aura': import_folder('../graphics/particles/aura'),
                 'heal': import_folder('../graphics/particles/heal/frames'),
-                'knife': import_folder('../graphics/particles/knife'),
+                'spike': import_folder('../graphics/particles/spike'),
                 
                 # attacks 
                 'claw': import_folder('../graphics/particles/claw'),
