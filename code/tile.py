@@ -6,7 +6,7 @@ class Tile(pygame.sprite.Sprite):
         super().__init__(groups)
         self.sprite_type=sprite_type
         y_offset=HITBOX_OFFSET[sprite_type]
-        self.image=surface
+        self.image=surface.convert_alpha()
         if sprite_type=='object':
             #offset of larger sprites
             self.rect=self.image.get_rect(topleft=(pos[0],pos[1]-TILESIZE))
