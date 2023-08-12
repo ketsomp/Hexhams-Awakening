@@ -158,7 +158,7 @@ class Player(Entity):
         if self.attacking:
             if current_time-self.attack_duration>=self.attack_cd:
                 self.attacking=False
-                self.destroy_attack() 
+                self.destroy_attack()
         
         # weapon switch cooldown
         if not self.can_switch_weapon:
@@ -200,7 +200,6 @@ class Player(Entity):
         return base_damage+weapon_damage
     
     def get_proj_damage(self):
-        print(self.proj)
         base_damage=self.stats['power']
         spike_damage=proj_data[self.proj]['strength']
         return base_damage+spike_damage
