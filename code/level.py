@@ -21,6 +21,7 @@ class Level:
         self.obstacle_sprites=pygame.sprite.Group()
 
         self.game_paused=False
+        self.paused=False
 
         #attack sprites
         self.current_attack=None
@@ -135,15 +136,20 @@ class Level:
 
     def toggle_menu(self):
         self.game_paused=not self.game_paused
-
+    
+    def pause(self):
+        self.paused=not self.paused
 
     def run(self):
+        self.player.check_death(self.player.pos)
         self.visible_sprites.custom_draw(self.player)
         self.ui.display(self.player)
         #update and draw game
-        if self.game_paused:
+        if self.game_paused :
             self.upgrade.display()
             # display upgrade menu
+        elif self.paused:
+            pass
         else:
             # run game
             self.visible_sprites.update()

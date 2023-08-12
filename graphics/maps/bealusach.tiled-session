@@ -8,10 +8,30 @@
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "/Users/Aniket/Downloads/Objects.tsx": {
+            "dynamicWrapping": true
+        },
+        "/Users/Aniket/Downloads/main_map.tsx": {
+            "dynamicWrapping": false
+        }
     },
+    "last.exportedFilePath": "/Users/Aniket/Downloads",
+    "last.imagePath": "/Users/Aniket/Downloads/MiniWorldSprites/Buildings/Wood",
+    "map.height": 100,
+    "map.lastUsedExportFilter": "CSV files (*.csv)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 100,
     "openFiles": [
     ],
     "project": "bealusach.tiled-project",
     "recentFiles": [
-    ]
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    },
+    "tileset.type": 1
 }
