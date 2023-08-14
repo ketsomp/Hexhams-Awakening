@@ -21,7 +21,8 @@ class Level:
         self.obstacle_sprites=pygame.sprite.Group()
 
         self.game_paused=False
-        self.paused=False
+        self.xpos=0
+        self.ypos=0
 
         #attack sprites
         self.current_attack=None
@@ -47,10 +48,10 @@ class Level:
         #        if col=='p':
         #            self.player=Player((x,y),[self.visible_sprites],self.obstacle_sprites)
         layout={
-            'boundary':import_csv_layout('../graphics/maps/map_FloorBlocks.csv'),
+            'boundary':import_csv_layout('../graphics/maps/beal_FloorBlocks.csv'),
             'grass':import_csv_layout('../graphics/maps/map_Grass.csv'),
-            'object':import_csv_layout('../graphics/maps/map_Objects.csv'),
-            'entities':import_csv_layout('../graphics/maps/map_Entities.csv')
+            'object':import_csv_layout('../graphics/maps/beal_Objects.csv'),
+            'entities':import_csv_layout('../graphics/maps/beal_Entities.csv')
 
         }
         graphics={
@@ -62,7 +63,9 @@ class Level:
                 for col_index,col in enumerate(row):
                     if col!='-1':
                         x=col_index*TILESIZE
+                        self.xpos=x
                         y=row_index*TILESIZE
+                        self.ypos=x
                         if style=='boundary':
                             Tile((x,y),[self.obstacle_sprites],'invisible')
                         if style=='grass':
@@ -70,7 +73,9 @@ class Level:
                             Tile((x,y),[self.visible_sprites,self.obstacle_sprites,self.attackable_sprites],'grass',rand_grass_image)
                         if style=='object':
                             surf=graphics['objects'][int(col)]
-                            Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'object',surf)
+                            #Tile((x,y),[self.obstacle_sprites],'invisible')
+                            Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'object',surf) # add surf for actual objects
+
                         if style=='entities':
                             if col=='394':
                                 self.player=Player(
@@ -136,20 +141,14 @@ class Level:
 
     def toggle_menu(self):
         self.game_paused=not self.game_paused
-    
-    def pause(self):
-        self.paused=not self.paused
 
     def run(self):
-        self.player.check_death(self.player.pos)
         self.visible_sprites.custom_draw(self.player)
         self.ui.display(self.player)
         #update and draw game
-        if self.game_paused :
+        if self.game_paused:
             self.upgrade.display()
             # display upgrade menu
-        elif self.paused:
-            pass
         else:
             # run game
             self.visible_sprites.update()
@@ -165,7 +164,7 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.offset=pygame.math.Vector2(100,200)
 
         #creating floor
-        self.floor_surface=pygame.image.load('../graphics/map_assets/ground.png')
+        self.floor_surface=pygame.image.load('../graphics/map_assets/12800_ground_map.png')
         self.floor_rect=self.floor_surface.get_rect(topleft=(0,0))
     
     def custom_draw(self,player):
