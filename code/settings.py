@@ -2,7 +2,7 @@
 WIDTH    = 1280	
 HEIGHT   = 720
 FPS      = 60
-TILESIZE = 64
+TILESIZE = 128
 BLACK = (0, 0, 0)
 
 HITBOX_OFFSET = {
@@ -10,6 +10,8 @@ HITBOX_OFFSET = {
     'object': -40,
     'grass': -10,
     'invisible': 0}
+
+SPEED_OFFSET=1.5
 
 #ui
 HEALTH_BAR_WIDTH = 200
