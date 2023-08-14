@@ -1,6 +1,7 @@
 import pygame
 from utility import import_folder
 from random import choice
+from settings import *
 
 class AnimationPlayer:
     def __init__(self):
@@ -60,7 +61,7 @@ class ParticleEffect(pygame.sprite.Sprite):
         super().__init__(groups)
         self.sprite_type='spike' # for multiple projs, sprite type as parameter
         self.frame_index=0
-        self.animation_speed=0.15
+        self.animation_speed=0.15*SPEED_OFFSET
         self.frames=animation_frames
         self.image=self.frames[self.frame_index]
         self.rect=self.image.get_rect(center=pos)
