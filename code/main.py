@@ -7,7 +7,8 @@ pygame.init()
 
 class Game:
     def __init__(self):
-        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        flags = pygame.DOUBLEBUF | pygame.HWSURFACE | pygame.FULLSCREEN
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT)) # ,flags,16
         pygame.display.set_caption("Hexham's Awakening")
         pygame.display.set_icon(pygame.image.load('../graphics/logo/ha_logo.png').convert_alpha())
         self.clock = pygame.time.Clock()
@@ -21,12 +22,12 @@ class Game:
         main_ost.play(loops=-1)
 
     def render(self):
-        self.text=self.font.render(str(round(self.clock.get_fps())),True,(255,255,255))
+        self.text=self.font.render(str(round(self.clock.get_fps())),1,(255,255,255))
         self.screen.blit(self.text,(WIDTH-50,0))  
     
     def run(self):
         #game loop 
-        while True:
+        while 1:
             #keys pressed
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -36,7 +37,8 @@ class Game:
                     if event.key==pygame.K_TAB:
                         self.level.toggle_menu()
                     if event.key==pygame.K_ESCAPE:
-                        self.level.pause()
+                        pygame.quit()
+                        sys.exit()
             #graphics drawn
             self.screen.fill(WATER_COLOR)
             self.level.run()
