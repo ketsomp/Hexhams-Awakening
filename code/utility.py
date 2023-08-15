@@ -21,7 +21,6 @@ def import_folder(path):
         else:
             img_files.sort()
         for image in img_files:
-            print(image) if 'object' in path else 6+9
             full_path = path + '/' + image
             if not image.startswith('.DS'): # to prevent those blasted .DS_Store files from being parsed
                 image_surf = pygame.image.load(full_path).convert_alpha()
