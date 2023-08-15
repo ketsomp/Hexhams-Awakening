@@ -69,7 +69,7 @@ class Level:
                         if style=='boundary':
                             Tile((x,y),[self.obstacle_sprites],'invisible')
                         if style=='grass':
-                            rand_grass_image=choice(graphics['grass'])
+                            rand_grass_image=choice(graphics['grass']).convert()
                             Tile((x,y),[self.visible_sprites,self.obstacle_sprites,self.attackable_sprites],'grass',rand_grass_image)
                         if style=='object':
                             surf=graphics['objects'][int(col)]
@@ -143,11 +143,12 @@ class Level:
         self.game_paused=not self.game_paused
 
     def run(self):
-        self.visible_sprites.custom_draw(self.player)
+        self.visible_sprites.custom_draw(self.player) # draw world
         self.ui.display(self.player)
         #update and draw game
         if self.game_paused:
             self.upgrade.display()
+            print(self.visible_sprites)
             # display upgrade menu
         else:
             # run game
@@ -164,7 +165,7 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.offset=pygame.math.Vector2(100,200)
 
         #creating floor
-        self.floor_surface=pygame.image.load('../graphics/map_assets/12800_ground_map.png')
+        self.floor_surface=pygame.image.load('../graphics/map_assets/12800_ground_map.png').convert()
         self.floor_rect=self.floor_surface.get_rect(topleft=(0,0))
     
     def custom_draw(self,player):
@@ -177,10 +178,9 @@ class YSortCameraGroup(pygame.sprite.Group):
         floor_offset_pos=self.floor_rect.topleft-self.offset
         self.display_surface.blit(self.floor_surface,floor_offset_pos)
 
-        #camwera movement
         for sprite in sorted(self.sprites(),key=lambda sprite:sprite.rect.centery):
             offset_pos=sprite.rect.topleft-self.offset
-            self.display_surface.blit(sprite.image,offset_pos)
+            self.display_surface.blit(sprite.image,offset_pos) # draw sprites on screen
 
     def enemy_update(self,player):
         enemy_sprites=[sprite for sprite in self.sprites() if hasattr(sprite,'sprite_type') and sprite.sprite_type=='enemy']
