@@ -17,8 +17,6 @@ def import_folder(path):
     for a,b,img_files in walk(path):
         if 'object' in path:
             img_files.remove( '.DS_Store') # .DS_Store is the bane of my existence
-
-            print(img_files)
             img_files.sort(key=lambda id:int(id.split('.')[0]))
         else:
             img_files.sort()

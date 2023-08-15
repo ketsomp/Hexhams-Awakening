@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "/Users/Aniket/Downloads/beal_map/main_map.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -13,16 +13,58 @@
             "scaleInDock": 1,
             "scaleInEditor": 1.1
         },
+        "/Users/Aniket/Downloads/beal_map/16x16 map tiles.tsx": {
+            "scaleInDock": 2.4993,
+            "scaleInEditor": 1
+        },
+        "/Users/Aniket/Downloads/beal_map/32x32 house castle.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/Aniket/Downloads/beal_map/castle house tiles.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/Aniket/Downloads/beal_map/ground tiles 32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/Aniket/Downloads/beal_map/main_map.tmx": {
+            "scale": 1.8631,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 306.47844989533576,
+                "y": 1432.8270087488595
+            }
+        },
         "/Users/Aniket/Downloads/beal_map/map tiles 64x64.tsx": {
             "scaleInDock": 0.6042,
             "scaleInEditor": 1
         },
+        "/Users/Aniket/Downloads/beal_map/map tiles.tsx": {
+            "scaleInDock": 0.3,
+            "scaleInEditor": 0.7141
+        },
+        "/Users/Aniket/Downloads/beal_map/map tilesheet 32x32.tsx": {
+            "scaleInDock": 1.217,
+            "scaleInEditor": 1
+        },
         "/Users/Aniket/Downloads/beal_map/map_tileset.tsx": {
-            "dynamicWrapping": false
+            "dynamicWrapping": false,
+            "scaleInDock": 0.3,
+            "scaleInEditor": 0.8554
+        },
+        "/Users/Aniket/Downloads/beal_map/proper tileset.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/Aniket/Downloads/beal_map/sand stump 32x32.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "/Users/Aniket/Downloads/main_map.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 0.7272,
+            "scaleInDock": 1.1997,
             "scaleInEditor": 1.1892
         },
         "/Users/Aniket/Downloads/map.tmx": {
@@ -43,14 +85,32 @@
     "map.tileWidth": 32,
     "map.width": 100,
     "openFiles": [
+        "/Users/Aniket/Downloads/beal_map/main_map.tmx",
+        "/Users/Aniket/Downloads/beal_map/map_tileset.tsx",
+        "/Users/Aniket/Downloads/beal_map/map tiles.tsx",
+        "/Users/Aniket/Downloads/beal_map/16x16 map tiles.tsx",
+        "/Users/Aniket/Downloads/beal_map/proper tileset.tsx",
+        "/Users/Aniket/Downloads/beal_map/map tilesheet 32x32.tsx",
+        "/Users/Aniket/Downloads/beal_map/sand stump 32x32.tsx",
+        "/Users/Aniket/Downloads/beal_map/castle house tiles.tsx",
+        "/Users/Aniket/Downloads/beal_map/32x32 house castle.tsx",
+        "/Users/Aniket/Downloads/beal_map/ground tiles 32x32.tsx"
     ],
     "project": "bealusach.tiled-project",
     "property.type": "int",
     "recentFiles": [
+        "/Users/Aniket/Downloads/beal_map/ground tiles 32x32.tsx",
+        "/Users/Aniket/Downloads/beal_map/32x32 house castle.tsx",
+        "/Users/Aniket/Downloads/beal_map/castle house tiles.tsx",
+        "/Users/Aniket/Downloads/beal_map/sand stump 32x32.tsx",
+        "/Users/Aniket/Downloads/beal_map/map tilesheet 32x32.tsx",
+        "/Users/Aniket/Downloads/beal_map/proper tileset.tsx",
+        "/Users/Aniket/Downloads/beal_map/16x16 map tiles.tsx",
+        "/Users/Aniket/Downloads/beal_map/map tiles.tsx",
+        "/Users/Aniket/Downloads/beal_map/map_tileset.tsx",
+        "/Users/Aniket/Downloads/beal_map/main_map.tmx",
         "/Users/Aniket/Downloads/beal_map/map tiles 64x64.tsx",
-        "/Users/Aniket/Downloads/main_map.tsx",
-        "/Users/Aniket/Downloads/map.tmx",
-        "/Users/Aniket/Downloads/Objects.tsx"
+        "/Users/Aniket/Downloads/main_map.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
