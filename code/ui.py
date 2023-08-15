@@ -10,6 +10,7 @@ class UI:
         # bar setup
         self.health_bar_rect=pygame.Rect(10,10,HEALTH_BAR_WIDTH,BAR_HEIGHT)
         self.energy_bar_rect=pygame.Rect(10,35,ENERGY_BAR_WIDTH,BAR_HEIGHT) # (l,t,b,h)
+        self.stamina_bar_rect=pygame.Rect(10,60,ENERGY_BAR_WIDTH,BAR_HEIGHT)
 
         # convert weapon dict
         self.weapon_graphics=[]
@@ -37,7 +38,7 @@ class UI:
 
         # drawing bar
         pygame.draw.rect(self.display_surface,color,current_rect)
-        pygame.draw.rect(self.display_surface,UI_BG_COLOR,bg_rect,3) # border around red hp bar, 4th parameter makes box outlined
+        pygame.draw.rect(self.display_surface,UI_BG_COLOR,bg_rect,3) # border around bar, 4th parameter makes box outlined
 
     def display_xp(self,xp):
         xp_offset=20
@@ -77,6 +78,7 @@ class UI:
         # display bars by calling above method
         self.display_bar(player.health,player.stats['health'],self.health_bar_rect,HEALTH_COLOR)
         self.display_bar(player.energy,player.stats['energy'],self.energy_bar_rect,ENERGY_COLOR)
+        self.display_bar(player.stamina,player.stats['stamina'],self.stamina_bar_rect,STAMINA_COLOR)
 
         self.display_xp(player.xp)
 
