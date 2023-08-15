@@ -12,7 +12,7 @@ class Enemy(Entity):
         # graphics
         self.import_graphics(monster_name)
         self.status='idle'
-        self.image=self.animations[self.status][self.frame_index]
+        self.image=self.animations[self.status][self.frame_index].convert_alpha()
         self.rect=self.image.get_rect(topleft=pos)
 
         # enemy stats (dict from settings converted to attributes using monster_info)

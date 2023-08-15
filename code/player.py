@@ -17,7 +17,6 @@ class Player(Entity):
         #graphics
         self.import_player_assets()
         self.status='down'
-        self.tombstone_img=pygame.transform.scale((pygame.image.load("../graphics/test/rip.png")),(64,64))
 
         #movement
         self.attacking=False
@@ -184,7 +183,7 @@ class Player(Entity):
             self.frame_index=0
 
         # set image
-        self.image=animation[int(self.frame_index)]
+        self.image=animation[int(self.frame_index)].convert_alpha()
         self.rect=self.image.get_rect(center=self.hitbox.center)
 
         # flicker when hit
@@ -219,7 +218,6 @@ class Player(Entity):
     def check_death(self,pos):
         if self.health<=0:
             self.death_sfx.play()
-            self.image=self.tombstone_img
             self.paused=True
             sleep(3)
             pygame.quit()
