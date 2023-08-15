@@ -18,11 +18,6 @@ class Player(Entity):
         self.import_player_assets()
         self.status='down'
 
-        #movement
-        self.attacking=False
-        self.attack_cd=400
-        self.attack_duration=None
-
         #weapon
         self.create_attack=create_attack
         self.destroy_attack=destroy_attack
@@ -42,13 +37,21 @@ class Player(Entity):
 
 
         #stats
-        self.stats = {'health': 100,'energy':60,'attack': 10,'power': 4,'speed': 6*7*SPEED_OFFSET}
-        self.max_stats = {'health': 300, 'energy': 140, 'attack': 20, 'power' : 10, 'speed': 10}
+        self.stats = {'health': 100,'energy':60,'attack': 10,'power': 4,'speed': 6*SPEED_OFFSET,'stamina':30}
+        self.max_stats = {'health': 300, 'energy': 140, 'attack': 20, 'power' : 10, 'speed': 10,'stamina':50}
         self.upgrade_cost = {'health': 100, 'energy': 100, 'attack': 100, 'power' : 100, 'speed': 100}
         self.health=self.stats['health']
         self.energy=self.stats['energy']
         self.xp=500
         self.speed=self.stats['speed']
+        self.stamina=self.stats['stamina']
+
+        #movement
+        self.attacking=False
+        self.attack_cd=400
+        self.attack_duration=None
+        self.sprinting=False
+        self.sprinting_speed=self.speed*1.5
 
         # damage timer
         self.vulnerable=True
@@ -103,7 +106,7 @@ class Player(Entity):
                 self.weapon_attack_sfx.play()
             
             # proj input
-            if keys[pygame.K_LSHIFT]:
+            if keys[pygame.K_f]:
                 self.attacking=True
                 self.attack_duration=pygame.time.get_ticks()
 
@@ -134,6 +137,14 @@ class Player(Entity):
                 else:
                     self.proj_index=0
                 self.proj=list(weapon_data.keys())[self.proj_index]
+
+            # sprinting
+            if keys[pygame.K_LSHIFT] and self.stamina>0:
+                self.sprinting=True
+                self.sprint_end_cd=pygame.time.get_ticks()
+            else:
+                self.sprinting=False
+
 
     def get_status(self):
         # idle
@@ -214,7 +225,15 @@ class Player(Entity):
             self.energy+=0.01*self.stats['power'] # recovery rate updated by base power stat
         else:
             self.energy=self.stats['energy']
-    
+
+    def is_sprinting(self):
+        if self.sprinting and self.stamina>0:
+            self.stamina-=0.1
+            self.speed=self.sprinting_speed
+        elif not self.sprinting and self.stamina<self.stats['stamina']:
+            self.stamina+=0.075
+            self.speed=self.sprinting_speed*0.5
+
     def check_death(self,pos):
         if self.health<=0:
             self.death_sfx.play()
@@ -228,5 +247,6 @@ class Player(Entity):
         self.cooldowns()
         self.get_status()
         self.animate()
-        self.move(self.stats['speed'])
+        self.move(self.speed)
         self.energy_recovery()
+        self.is_sprinting()
