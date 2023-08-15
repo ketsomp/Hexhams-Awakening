@@ -30,6 +30,7 @@ TEXT_COLOR = '#EEEEEE'
 # ui colors
 HEALTH_COLOR = 'red'
 ENERGY_COLOR = 'blue'
+STAMINA_COLOR='yellow'
 UI_BORDER_COLOR_ACTIVE = 'gold'
 XP_COLOR=(109, 232, 102)
 
