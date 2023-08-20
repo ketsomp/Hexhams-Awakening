@@ -125,7 +125,7 @@ class Level:
                         elif target_sprite.sprite_type=='enemy':
                             target_sprite.get_damage(self.player,attack_sprite.sprite_type)
 
-    def damage_player(self,amount,attack_type):
+    def damage_player(self,amount,attack_type,attack_cd):
         if self.player.vulnerable:
             self.player.health-=amount
             self.player.vulnerable=False
