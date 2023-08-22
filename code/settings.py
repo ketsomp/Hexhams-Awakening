@@ -27,7 +27,7 @@ LOGO_FONT='../graphics/font/magnific_chaos.ttf'
 LOGO_FONT_COLOR='#FFBC00'
 
 # general colors
-WATER_COLOR = '#71ddee'
+BG_COLOR = '#71ddee'
 UI_BG_COLOR = '#222222'
 UI_BORDER_COLOR = '#111111'
 TEXT_COLOR = '#EEEEEE'
