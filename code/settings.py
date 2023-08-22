@@ -4,6 +4,7 @@ HEIGHT   = 720
 FPS      = 60
 TILESIZE = 128
 BLACK = (0, 0, 0)
+WHITE= (255, 255, 255)
 
 HITBOX_OFFSET = {
     'player': -26,
@@ -20,6 +21,10 @@ UI_FONT = '../graphics/font/joystix.ttf'
 UI_FONT_SIZE = 18
 BAR_HEIGHT = 20
 HOTBOX_SIZE = 80
+
+#logo
+LOGO_FONT='../graphics/font/magnific_chaos.ttf'
+LOGO_FONT_COLOR='#FFBC00'
 
 # general colors
 WATER_COLOR = '#71ddee'
