@@ -3,7 +3,7 @@ from settings import *
 from tile import Tile
 from player import Player
 from debug import debug
-from utility import import_csv_layout,import_folder
+from utility import import_csv_layout,import_folder,add_outline_to_image
 from random import choice,randint
 from weapon import Weapon
 from ui import UI
@@ -11,6 +11,7 @@ from enemy import Enemy
 from particles import AnimationPlayer
 from projectile import ItemPlayer
 from upgrade import Upgrade
+from button import Button
 
 class Level:
     def __init__(self):
@@ -21,6 +22,7 @@ class Level:
         self.obstacle_sprites=pygame.sprite.Group()
 
         self.game_paused=False
+        self.paused=False
         self.xpos=0
         self.ypos=0
 
@@ -28,6 +30,22 @@ class Level:
         self.current_attack=None
         self.attack_sprites=pygame.sprite.Group() # for weapons and projectiles
         self.attackable_sprites=pygame.sprite.Group() # for attackable objects, eg. monsters, grass
+
+        self.started=False
+        self.start_img=pygame.image.load('/Users/Aniket/Downloads/6400 16x16 map.png')
+        self.start_rect=self.start_img.get_rect()
+
+        self.start_button_img=pygame.image.load('../graphics/buttons/start_button.png')
+        self.quit_button_img=pygame.image.load('../graphics/buttons/quit_button.png')
+
+        self.startx=-650
+        self.starty=-650
+
+        self.start_button=Button(400,450,self.start_button_img)
+        self.quit_button=Button(700,450,self.quit_button_img)
+
+        self.logo_font=pygame.font.Font(LOGO_FONT,80)
+        self.logo_font_out=pygame.font.Font(LOGO_FONT,85)
 
         #sprite setup
         self.create_map()
@@ -142,17 +160,35 @@ class Level:
     def toggle_menu(self):
         self.game_paused=not self.game_paused
 
+    def start_screen(self):
+        self.screen=pygame.display.get_surface()
+        self.startx-=0.5
+        self.starty-=0.5
+        self.screen.blit(self.start_img,(self.startx,self.starty))
+    
+    def draw_game_font(self):
+        text1=self.logo_font.render("Hexham's",1,LOGO_FONT_COLOR)
+        text2=self.logo_font.render("Awakening",1,LOGO_FONT_COLOR)
+        text1_outline=add_outline_to_image(text1,2,'#0504aa')
+        text2_outline=add_outline_to_image(text2,2,'#0504aa')
+        self.screen.blit(text1_outline,(500,200))
+        self.screen.blit(text2_outline,(475,325))
+    
+    def button_actions(self):
+        pass
+    
     def run(self):
         self.visible_sprites.custom_draw(self.player) # draw world
         self.ui.display(self.player)
         #update and draw game
         if self.game_paused:
             self.upgrade.display()
-            print(self.visible_sprites)
             # display upgrade menu
+        elif self.paused:
+            pass
         else:
             # run game
-            self.visible_sprites.update()
+            self.visible_sprites.update() # update visible sprites on screen
             self.visible_sprites.enemy_update(self.player)
             self.player_attack_logic()
 
