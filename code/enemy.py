@@ -93,7 +93,7 @@ class Enemy(Entity):
             self.attack_time=pygame.time.get_ticks()
             self.attack_sound.play()
             self.damage_play(self.attack_damage,self.attack_type,self.atk_delay)
-            print('attack',current_time,self.atk_delay,end='')
+            #print('attack',current_time,self.atk_delay,end='')
         elif self.status=='move':
             self.direction=self.get_player_dist_dir(player)[1] # get direction from method
         else:
@@ -120,7 +120,6 @@ class Enemy(Entity):
 
     def cooldowns(self):
         current_time=pygame.time.get_ticks()
-        print(self.can_move,self.passive_movement_counter)
         self.passive_movement_counter+=1
         if self.passive_movement_counter>self.passive_movement_cd:
             self.can_move=not self.can_move
@@ -129,7 +128,7 @@ class Enemy(Entity):
         if not self.can_attack:
             if time()-self.attack_time>self.atk_delay:
                 self.can_attack=True
-                print('attack,',time())
+                #print('attack,',time())
         if not self.vulnerable:
             if current_time-self.hit_time>=self.invincibility_duration:
                 self.vulnerable=True
