@@ -32,7 +32,7 @@ class Level:
         self.attackable_sprites=pygame.sprite.Group() # for attackable objects, eg. monsters, grass
 
         self.started=False
-        self.start_img=pygame.image.load('/Users/Aniket/Downloads/6400 16x16 map.png')
+        self.start_img=pygame.image.load('../graphics/map_assets/6400 16x16 map.png')
         self.start_rect=self.start_img.get_rect()
 
         self.start_button_img=pygame.image.load('../graphics/buttons/start_button.png')
@@ -176,7 +176,7 @@ class Level:
     
     def button_actions(self):
         pass
-    
+
     def run(self):
         self.visible_sprites.custom_draw(self.player) # draw world
         self.ui.display(self.player)
