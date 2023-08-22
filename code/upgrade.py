@@ -39,8 +39,8 @@ class Upgrade:
                 self.item_list[self.selection_index].trigger(self.player)
 
             if self.selection_index<=0:
-                self.selection_index=5
-            if self.selection_index>=5:
+                self.selection_index=6
+            if self.selection_index>=6:
                 self.selection_index=0
 
     def selection_cooldown(self):
