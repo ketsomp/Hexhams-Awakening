@@ -14,20 +14,35 @@ class Game:
         self.clock = pygame.time.Clock()
         self.font=pygame.font.Font(UI_FONT,20)
 
+        self.screen.fill(BG_COLOR)
+
+
         self.level=Level()
 
         # ost
-        main_ost=pygame.mixer.Sound('../audio/ost.ogg')
-        main_ost.set_volume(0.5)
-        main_ost.play(loops=-1)
+        self.main_ost=pygame.mixer.Sound('../audio/ost.ogg')
+        self.starting_ost=pygame.mixer.Sound('../audio/starting_screen.ogg')
+        self.main_ost.set_volume(0.5)
+        self.starting_ost.set_volume(0.5)
+        self.starting_ost.play(loops=-1)
 
     def render(self):
-        self.text=self.font.render(str(round(self.clock.get_fps())),1,(255,255,255))
+        self.text=self.font.render(str(round(self.clock.get_fps())),1,(255,255,255)) # render fps
         self.screen.blit(self.text,(WIDTH-50,0))  
     
     def run(self):
         #game loop 
-        while 1:
+        while True:
+            if not self.level.started:
+                self.level.start_screen()
+                self.level.draw_game_font()
+                if self.level.start_button.draw(self.screen):
+                    self.level.started=True
+                    self.starting_ost.stop()
+                    self.main_ost.play(loops=-1)
+                if self.level.quit_button.draw(self.screen):
+                    pygame.quit()
+                    sys.exit()
             #keys pressed
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -37,12 +52,13 @@ class Game:
                     if event.key==pygame.K_TAB:
                         self.level.toggle_menu()
                     if event.key==pygame.K_ESCAPE:
-                        pygame.quit()
-                        sys.exit()
+                        self.level.paused=not self.level.paused
+
             #graphics drawn
-            self.screen.fill(WATER_COLOR)
-            self.level.run()
-            self.render()
+            if self.level.started:
+                print('dog')
+                self.level.run()
+                self.render()
 
             #update display
             pygame.display.update()
