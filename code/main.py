@@ -56,7 +56,6 @@ class Game:
 
             #graphics drawn
             if self.level.started:
-                print('dog')
                 self.level.run()
                 self.render()
 
