@@ -15,6 +15,7 @@ from button import Button
 
 class Level:
     def __init__(self):
+        global mode
         #get pygame display surface
         self.display_surface=pygame.display.get_surface()
         #sprite groups definitions
@@ -25,6 +26,8 @@ class Level:
         self.paused=False
         self.xpos=0
         self.ypos=0
+
+        mode=False # True for embedded map, more fps (30), False for individual tile implementation, less fps (25)
 
         #attack sprites
         self.current_attack=None
@@ -91,8 +94,10 @@ class Level:
                             Tile((x,y),[self.visible_sprites,self.obstacle_sprites,self.attackable_sprites],'grass',rand_grass_image)
                         if style=='object':
                             surf=graphics['objects'][int(col)]
-                            #Tile((x,y),[self.obstacle_sprites],'invisible')
-                            Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'object',surf) # add surf for actual objects
+                            if mode:
+                                Tile((x,y),[self.obstacle_sprites],'invisible')
+                            else:
+                                Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'object',surf) # add surf for actual objects
 
                         if style=='entities':
                             if col=='394':
@@ -201,7 +206,8 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.offset=pygame.math.Vector2(100,200)
 
         #creating floor
-        self.floor_surface=pygame.image.load('../graphics/map_assets/12800_ground_map.png').convert()
+        #self.floor_surface=pygame.image.load('../graphics/map_assets/bigger_map.png').convert() # True
+        self.floor_surface=pygame.image.load('../graphics/map_assets/12800_ground_map.png').convert() # False
         self.floor_rect=self.floor_surface.get_rect(topleft=(0,0))
     
     def custom_draw(self,player):
