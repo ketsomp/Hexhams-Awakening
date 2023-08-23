@@ -45,6 +45,8 @@ class Player(Entity):
         self.xp=500
         self.speed=self.stats['speed']
         self.stamina=self.stats['stamina']
+        self.attack_stat=self.stats['attack']
+        self.power_stat=self.stats['power']
 
         #movement
         self.attacking=False
@@ -111,7 +113,7 @@ class Player(Entity):
                 self.attack_duration=pygame.time.get_ticks()
 
                 style=list(proj_data.keys())[self.proj_index]
-                strength=list(proj_data.values())[self.proj_index]['strength']+self.stats['power']
+                strength=list(proj_data.values())[self.proj_index]['strength']+self.power_stat
                 cost=list(proj_data.values())[self.proj_index]['cost']
 
                 self.create_proj(style,strength,cost)
@@ -205,12 +207,12 @@ class Player(Entity):
             self.image.set_alpha(255)
    
     def get_weapon_damage(self):
-        base_damage=self.stats['attack']
+        base_damage=self.attack_stat
         weapon_damage=weapon_data[self.weapon]['damage']
         return base_damage+weapon_damage
     
     def get_proj_damage(self):
-        base_damage=self.stats['power']
+        base_damage=self.power_stat
         spike_damage=proj_data[self.proj]['strength']
         return base_damage+spike_damage
 
@@ -222,7 +224,7 @@ class Player(Entity):
 
     def energy_recovery(self): # constant energy recovery after casting spells
         if self.energy<self.stats['energy']:
-            self.energy+=0.01*self.stats['power'] # recovery rate updated by base power stat
+            self.energy+=0.01*self.power_stat # recovery rate updated by base power stat
         else:
             self.energy=self.stats['energy']
 
