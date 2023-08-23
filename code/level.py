@@ -94,10 +94,11 @@ class Level:
                             Tile((x,y),[self.visible_sprites,self.obstacle_sprites,self.attackable_sprites],'grass',rand_grass_image)
                         if style=='object':
                             surf=graphics['objects'][int(col)]
+                            hit_id=int(col) if int(col) in [16,17,22,25,36,39,40,49,58,59,67,71,73,75,93,94,105,106,107] else 200 # all alpha tile ids that require specific hitboxes
                             if mode:
-                                Tile((x,y),[self.obstacle_sprites],'invisible')
+                                Tile((x,y),[self.obstacle_sprites],'invisible','invisible')
                             else:
-                                Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'object',surf) # add surf for actual objects
+                                Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'object',surf,hit_id) # add surf for actual objects
 
                         if style=='entities':
                             if col=='394':
@@ -109,7 +110,7 @@ class Level:
                             else: # check which enemy the entity that isnt player is
                                 if col=='390': monster_name='flying_eye'
                                 elif col=='391': monster_name='mushroom'
-                                elif col=='392': monster_name='goblin'
+                                elif col=='392': monster_name='skeleton'
                                 else: monster_name='skeleton'
                                 Enemy(monster_name,
                                       (x,y),
@@ -148,7 +149,7 @@ class Level:
                         elif target_sprite.sprite_type=='enemy':
                             target_sprite.get_damage(self.player,attack_sprite.sprite_type)
 
-    def damage_player(self,amount,attack_type,attack_cd):
+    def damage_player(self,amount,attack_type):
         if self.player.vulnerable:
             self.player.health-=amount
             self.player.vulnerable=False
@@ -179,9 +180,6 @@ class Level:
         self.screen.blit(text1_outline,(500,200))
         self.screen.blit(text2_outline,(475,325))
     
-    def button_actions(self):
-        pass
-
     def run(self):
         self.visible_sprites.custom_draw(self.player) # draw world
         self.ui.display(self.player)

@@ -27,12 +27,11 @@ class Enemy(Entity):
         self.attack_radius = monster_info['attack_radius']
         self.aggro_radius = monster_info['aggro_radius']
         self.attack_type = monster_info['attack_type']
-        self.atk_delay=monster_info['atk_delay']
 
         # player interaction
-        self.can_attack=None
-        self.attack_time=time()
-        self.attack_cooldown=400
+        self.can_attack=True
+        self.attack_time=None
+        self.attack_cooldown=monster_info['atk_delay']
         self.damage_play=damage_player
         self.trigger_death_particles=trigger_death_particles
         self.add_xp=add_xp
@@ -84,7 +83,7 @@ class Enemy(Entity):
             self.status='attack'
         elif distance<=self.aggro_radius:
             self.status='move'
-        else:
+        elif distance>self.aggro_radius:
             self.status='idle'
 
     def actions(self,player):
@@ -92,15 +91,16 @@ class Enemy(Entity):
         if self.status=='attack':
             self.attack_time=pygame.time.get_ticks()
             self.attack_sound.play()
-            self.damage_play(self.attack_damage,self.attack_type,self.atk_delay)
-            #print('attack',current_time,self.atk_delay,end='')
+            self.damage_play(self.attack_damage,self.attack_type)
         elif self.status=='move':
             self.direction=self.get_player_dist_dir(player)[1] # get direction from method
         else:
+            # idling side to side
             if self.can_move:
                 self.direction=pygame.math.Vector2((1,0))
             else:
                 self.direction=pygame.math.Vector2((-1,0))
+
     def animate(self):
         animation=self.animations[self.status]
         self.frame_index+=self.animation_speed # from entity inheritance
@@ -126,7 +126,8 @@ class Enemy(Entity):
             self.passive_movement_counter=0
             
         if not self.can_attack:
-            if time()-self.attack_time>self.atk_delay:
+            current_time=pygame.time.get_ticks()
+            if current_time-self.attack_time>=self.attack_cooldown:
                 self.can_attack=True
                 #print('attack,',time())
         if not self.vulnerable:
@@ -163,6 +164,7 @@ class Enemy(Entity):
         self.cooldowns()
         self.animate()
         self.check_death()
+        print(self.status)
     
     def enemy_update(self,player):
         self.get_status(player)
