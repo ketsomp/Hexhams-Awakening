@@ -19,13 +19,6 @@ class Game:
 
         self.level=Level()
 
-        # ost
-        self.main_ost=pygame.mixer.Sound('../audio/ost.ogg')
-        self.starting_ost=pygame.mixer.Sound('../audio/starting_screen.ogg')
-        self.main_ost.set_volume(0.5)
-        self.starting_ost.set_volume(0.5)
-        self.starting_ost.play(loops=-1)
-
     def render(self):
         self.text=self.font.render(str(round(self.clock.get_fps())),1,(255,255,255)) # render fps
         self.screen.blit(self.text,(WIDTH-50,0))  
@@ -35,14 +28,6 @@ class Game:
         while True:
             if not self.level.started:
                 self.level.start_screen()
-                self.level.draw_game_font()
-                if self.level.start_button.draw(self.screen):
-                    self.level.started=True
-                    self.starting_ost.stop()
-                    self.main_ost.play(loops=-1)
-                if self.level.quit_button.draw(self.screen):
-                    pygame.quit()
-                    sys.exit()
             #keys pressed
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
