@@ -10,7 +10,13 @@ HITBOX_OFFSET = {
     'player': -26,
     'object': -40,
     'grass': -10,
-    'invisible': 0}
+    'invisible': 0,
+    '200':0,
+    '0':50,'01':100,'02':50,'16':100,'17':100,'22':100,'25':20,'36':15,'39':15,'40':0,'49':10,'58':0,'59':0,'67':15,'71':0,'73':15,'75':15,'93':30,'94':30,'105':30,'106':30,'107':100}
+X_HITBOX_OFFSET={
+    '200':0,
+    '0':50,'01':100,'02':50,'16':100,'17':100,'22':100,'25':50,'36':20,'39':16,'40':5,'49':10,'58':10,'59':10,'67':25,'71':10,'73':15,'75':20,'93':30,'94':30,'105':30,'106':30,'107':100}
+
 
 SPEED_OFFSET=1.5
 
@@ -60,7 +66,7 @@ proj_data = {
 
 # enemies
 monster_data = {
-    'skeleton': {'health': 300,'xp':250,'damage':40,'attack_type': 'slash', 'attack_sound':'../audio/attack/claw.wav', 'speed': 2, 'resistance': 4, 'attack_radius': 120, 'aggro_radius': 400,'atk_delay':10},
-    'mushroom': {'health': 100,'xp':100,'damage':20,'attack_type': 'slash',  'attack_sound':'../audio/attack/claw.wav','speed': 2, 'resistance': 3, 'attack_radius': 80, 'aggro_radius': 360,'atk_delay':400},
-    'goblin': {'health': 100,'xp':110,'damage':8,'attack_type': 'claw', 'attack_sound':'../audio/attack/claw.wav', 'speed': 3, 'resistance': 3, 'attack_radius': 60, 'aggro_radius': 350,'atk_delay':300},
-    'flying_eye': {'health': 70,'xp':120,'damage':6,'attack_type': 'thunder', 'attack_sound':'../audio/attack/slash.wav', 'speed': 4, 'resistance': 3, 'attack_radius': 50, 'aggro_radius': 300,'atk_delay':200}}
+    'skeleton': {'health': 300,'xp':250,'damage':40,'attack_type': 'slash', 'attack_sound':'../audio/attack/claw.wav', 'speed': 2, 'resistance': 4, 'attack_radius': 100, 'aggro_radius': 400,'atk_delay':10},
+    'mushroom': {'health': 100,'xp':100,'damage':20,'attack_type': 'slash',  'attack_sound':'../audio/attack/claw.wav','speed': 2, 'resistance': 3, 'attack_radius': 100, 'aggro_radius': 360,'atk_delay':400},
+    'goblin': {'health': 100,'xp':110,'damage':8,'attack_type': 'claw', 'attack_sound':'../audio/attack/claw.wav', 'speed': 3, 'resistance': 3, 'attack_radius': 100, 'aggro_radius': 350,'atk_delay':300},
+    'flying_eye': {'health': 70,'xp':120,'damage':6,'attack_type': 'thunder', 'attack_sound':'../audio/attack/slash.wav', 'speed': 4, 'resistance': 3, 'attack_radius': 100, 'aggro_radius': 300,'atk_delay':200}}
