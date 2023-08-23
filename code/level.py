@@ -12,6 +12,7 @@ from particles import AnimationPlayer
 from projectile import ItemPlayer
 from upgrade import Upgrade
 from button import Button
+import sys
 
 class Level:
     def __init__(self):
@@ -34,28 +35,46 @@ class Level:
         self.attack_sprites=pygame.sprite.Group() # for weapons and projectiles
         self.attackable_sprites=pygame.sprite.Group() # for attackable objects, eg. monsters, grass
 
+        # splash screen setup
         self.started=False
         self.start_img=pygame.image.load('../graphics/map_assets/6400 16x16 map.png')
         self.start_rect=self.start_img.get_rect()
 
+        # importing button images
         self.start_button_img=pygame.image.load('../graphics/buttons/start_button.png')
         self.quit_button_img=pygame.image.load('../graphics/buttons/quit_button.png')
+        self.main_menu_button_img=pygame.image.load('../graphics/buttons/main_menu_button.png')
+        self.mute_button_img=pygame.image.load('../graphics/buttons/mute_button.png')
 
+        # starting coordinates of moving background on splash screen
         self.startx=-650
         self.starty=-650
 
+        self.muted=False
+
+        # initialising buttons
         self.start_button=Button(400,450,self.start_button_img)
         self.quit_button=Button(700,450,self.quit_button_img)
+        self.main_menu_button=Button(400,350,self.main_menu_button_img)
+        self.mute_button=Button(700,350,self.mute_button_img)
 
+        # fonts
         self.logo_font=pygame.font.Font(LOGO_FONT,80)
-        self.logo_font_out=pygame.font.Font(LOGO_FONT,85)
+        self.ui_font=pygame.font.Font(UI_FONT,UI_FONT_SIZE)
 
-        #sprite setup
+        # sprite setup
         self.create_map()
 
         # ui
         self.ui=UI()
         self.upgrade=Upgrade(self.player)
+
+        #ost
+        self.main_ost=pygame.mixer.Sound('../audio/ost.ogg')
+        self.starting_ost=pygame.mixer.Sound('../audio/starting_screen.ogg')
+        self.main_ost.set_volume(0.5)
+        self.starting_ost.set_volume(0.5)
+        self.starting_ost.play(loops=-1)
 
         # particles
         self.animation_player=AnimationPlayer()
@@ -79,6 +98,7 @@ class Level:
             'grass':import_folder('../graphics/grass'),
             'objects': import_folder('../graphics/objects')
         }
+        # generate map on intialisation
         for style,layout in layout.items():
             for row_index,row in enumerate(layout):
                 for col_index,col in enumerate(row):
@@ -171,14 +191,62 @@ class Level:
         self.startx-=0.5
         self.starty-=0.5
         self.screen.blit(self.start_img,(self.startx,self.starty))
+        self.draw_game_font()
+        if self.start_button.draw(self.screen):
+            self.started=True
+            self.starting_ost.stop()
+            self.main_ost.play(loops=-1)
+        if self.quit_button.draw(self.screen):
+            pygame.quit()
+            sys.exit()
+        self.paused=False
     
     def draw_game_font(self):
         text1=self.logo_font.render("Hexham's",1,LOGO_FONT_COLOR)
         text2=self.logo_font.render("Awakening",1,LOGO_FONT_COLOR)
-        text1_outline=add_outline_to_image(text1,2,'#0504aa')
-        text2_outline=add_outline_to_image(text2,2,'#0504aa')
+        text1_outline=add_outline_to_image(text1,2,LOGO_OUTLINE_COLOR)
+        text2_outline=add_outline_to_image(text2,2,LOGO_OUTLINE_COLOR)
         self.screen.blit(text1_outline,(500,200))
         self.screen.blit(text2_outline,(475,325))
+
+    def mute(self):
+        self.muted=not self.muted
+        if self.muted:
+            self.main_ost.stop()
+        elif not self.muted:
+            self.main_ost.play()
+
+    def draw_text(self,text,color,x,y):
+        text_drawn=self.ui_font.render(text,1,color)
+        self.screen.blit(text_drawn,(x,y))
+
+    def pause(self):
+        # transparent black background
+        pause_surface=pygame.Surface((WIDTH,HEIGHT))
+        pause_surface.set_alpha(128)
+        pause_surface.fill(BLACK)
+        self.screen.blit(pause_surface,(0,0))
+
+         # stats written on pause screen
+        self.draw_text(f"Health: {self.player.health}",WHITE,560,440)
+        self.draw_text(f"Energy: {self.player.energy}",WHITE,560,490)
+        self.draw_text(f"Attack: {self.player.attack_stat}",WHITE,560,540)
+        self.draw_text(f"Power: {self.player.power_stat}",WHITE,560,590)
+        self.draw_text(f"Stamina: {round(self.player.stamina)}",WHITE,560,640)
+
+        # paused text
+        pause_text=self.logo_font.render("PAUSED",1,'red')
+        pause_text_outline=add_outline_to_image(pause_text,2,LOGO_FONT_COLOR)
+        self.screen.blit(pause_text_outline,(400,100))
+
+        # buttons functionality
+        if self.main_menu_button.draw(self.screen):
+            self.started=False
+            self.main_ost.stop()
+            self.starting_ost.play(loops=-1)
+        if self.mute_button.draw(self.screen):
+            self.mute()
+
     
     def run(self):
         self.visible_sprites.custom_draw(self.player) # draw world
@@ -188,7 +256,7 @@ class Level:
             self.upgrade.display()
             # display upgrade menu
         elif self.paused:
-            pass
+            self.pause()
         else:
             # run game
             self.visible_sprites.update() # update visible sprites on screen
