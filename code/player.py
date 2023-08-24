@@ -3,7 +3,6 @@ from settings import *
 from utility import import_folder
 from entity import Entity
 from time import sleep
-import sys
 
 class Player(Entity):
     def __init__(self,pos,groups,obstacle_sprites,create_attack,destroy_attack,create_proj):
@@ -64,9 +63,7 @@ class Player(Entity):
 
         # sfx
         self.weapon_attack_sfx=pygame.mixer.Sound('../audio/sword.wav')
-        self.death_sfx=pygame.mixer.Sound("../audio/oof.mp3")
         self.weapon_attack_sfx.set_volume(0.2)
-        self.death_sfx.set_volume(0.2)
 
     def import_player_assets(self):
         character_path='../graphics/player/'
@@ -235,14 +232,6 @@ class Player(Entity):
         elif not self.sprinting and self.stamina<self.stats['stamina']:
             self.stamina+=0.075
             self.speed=self.sprinting_speed*0.5
-
-    def check_death(self,pos):
-        if self.health<=0:
-            self.death_sfx.play()
-            self.paused=True
-            sleep(3)
-            pygame.quit()
-            sys.exit()
 
     def update(self):
         self.input()
