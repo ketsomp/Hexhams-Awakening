@@ -49,7 +49,6 @@ class Level:
         self.quit_button_img=pygame.image.load('../graphics/buttons/quit_button.png')
         self.main_menu_button_img=pygame.image.load('../graphics/buttons/main_menu_button.png')
         self.mute_button_img=pygame.image.load('../graphics/buttons/mute_button.png')
-        self.main_menu_button_img=pygame.image.load('../graphics/buttons/main_menu_button.png')
         self.death_img=pygame.image.load('../graphics/test/rip.png')
 
         # starting coordinates of moving background on splash screen
