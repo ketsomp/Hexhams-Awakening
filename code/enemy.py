@@ -164,7 +164,6 @@ class Enemy(Entity):
         self.cooldowns()
         self.animate()
         self.check_death()
-        print(self.status)
     
     def enemy_update(self,player):
         self.get_status(player)
