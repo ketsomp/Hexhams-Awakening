@@ -16,19 +16,23 @@ import sys
 
 class Level:
     def __init__(self):
-        global mode
+
         #get pygame display surface
         self.display_surface=pygame.display.get_surface()
         #sprite groups definitions
         self.visible_sprites=YSortCameraGroup()
         self.obstacle_sprites=pygame.sprite.Group()
 
-        self.game_paused=False
-        self.paused=False
-        self.xpos=0
+         # stop states
+        self.game_paused=False # True: if upgrade menu in use
+        self.paused=False # True: if game on pause screen
+        self.stopped=False # True: if player dies and on death screen
+
+        # map scrolling
+        self.xpos=0 # for 
         self.ypos=0
 
-        mode=False # True for embedded map, more fps (30), False for individual tile implementation, less fps (25)
+        self.mode=False # True for embedded map, more fps (30), False for individual tile implementation, less fps (25)
 
         #attack sprites
         self.current_attack=None
@@ -40,11 +44,13 @@ class Level:
         self.start_img=pygame.image.load('../graphics/map_assets/6400 16x16 map.png')
         self.start_rect=self.start_img.get_rect()
 
-        # importing button images
+        # importing images
         self.start_button_img=pygame.image.load('../graphics/buttons/start_button.png')
         self.quit_button_img=pygame.image.load('../graphics/buttons/quit_button.png')
         self.main_menu_button_img=pygame.image.load('../graphics/buttons/main_menu_button.png')
         self.mute_button_img=pygame.image.load('../graphics/buttons/mute_button.png')
+        self.main_menu_button_img=pygame.image.load('../graphics/buttons/main_menu_button.png')
+        self.death_img=pygame.image.load('../graphics/test/rip.png')
 
         # starting coordinates of moving background on splash screen
         self.startx=-650
@@ -57,36 +63,36 @@ class Level:
         self.quit_button=Button(700,450,self.quit_button_img)
         self.main_menu_button=Button(400,350,self.main_menu_button_img)
         self.mute_button=Button(700,350,self.mute_button_img)
+        self.death_main_menu_button=Button(525,400,self.main_menu_button_img)
 
         # fonts
         self.logo_font=pygame.font.Font(LOGO_FONT,80)
         self.ui_font=pygame.font.Font(UI_FONT,UI_FONT_SIZE)
 
-        # sprite setup
+        # map and sprite setup
         self.create_map()
 
         # ui
         self.ui=UI()
         self.upgrade=Upgrade(self.player)
 
-        #ost
+        # ost
         self.main_ost=pygame.mixer.Sound('../audio/ost.ogg')
         self.starting_ost=pygame.mixer.Sound('../audio/starting_screen.ogg')
         self.main_ost.set_volume(0.5)
         self.starting_ost.set_volume(0.5)
         self.starting_ost.play(loops=-1)
 
+        # sfx
+        self.death_sfx=pygame.mixer.Sound("../audio/oof.mp3")
+        self.death_sfx.set_volume(0.2)
+
         # particles
         self.animation_player=AnimationPlayer()
         self.magic_player=ItemPlayer(self.animation_player)
 
     def create_map(self):
-        #        # col - current tile being iterated over
-        #        # case for each type of data in WORLD_MAP
-        #        if col=='x':
-        #            Tile((x,y),[self.visi  ble_sprites,self.obstacle_sprites])
-        #        if col=='p':
-        #            self.player=Player((x,y),[self.visible_sprites],self.obstacle_sprites)
+
         layout={
             'boundary':import_csv_layout('../graphics/maps/beal_FloorBlocks.csv'),
             'grass':import_csv_layout('../graphics/maps/map_Grass.csv'),
@@ -115,7 +121,7 @@ class Level:
                         if style=='object':
                             surf=graphics['objects'][int(col)]
                             hit_id=int(col) if int(col) in [16,17,22,25,36,39,40,49,58,59,67,71,73,75,93,94,105,106,107] else 200 # all alpha tile ids that require specific hitboxes
-                            if mode:
+                            if self.mode:
                                 Tile((x,y),[self.obstacle_sprites],'invisible','invisible')
                             else:
                                 Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'object',surf,hit_id) # add surf for actual objects
@@ -186,13 +192,21 @@ class Level:
     def toggle_menu(self):
         self.game_paused=not self.game_paused
 
+    def restart(self):
+        self.visible_sprites.empty()
+        self.obstacle_sprites.empty()
+        self.attack_sprites.empty()
+        self.attackable_sprites.empty()
+        self.create_map()
+
     def start_screen(self):
         self.screen=pygame.display.get_surface()
-        self.startx-=0.5
+        self.startx-=0.5 # move background image of map across screen
         self.starty-=0.5
         self.screen.blit(self.start_img,(self.startx,self.starty))
         self.draw_game_font()
         if self.start_button.draw(self.screen):
+            self.stopped=False
             self.started=True
             self.starting_ost.stop()
             self.main_ost.play(loops=-1)
@@ -243,22 +257,51 @@ class Level:
         if self.main_menu_button.draw(self.screen):
             self.started=False
             self.main_ost.stop()
+            self.restart()
             self.starting_ost.play(loops=-1)
         if self.mute_button.draw(self.screen):
             self.mute()
 
+
+    def check_death(self,pos):
+
+        screen=pygame.display.get_surface()
+        screen.blit(self.death_img,(pos))
+        if self.player.health<=0:
+            self.death_sfx.play()
+            self.stopped=True
+
+            # red tint to background
+            death_surface=pygame.Surface((WIDTH,HEIGHT))
+            death_surface.set_alpha(128)
+            death_surface.fill((255,0,0))
+            screen.blit(death_surface,(0,0))
+
+             # death text
+            death_text=self.logo_font.render("GAME''OVER!",1,'#853c41')
+            death_text_outline=add_outline_to_image(death_text,2,BLACK)
+            self.screen.blit(death_text_outline,(300,175))
+
+            # button to restart by going to main menus
+            if self.death_main_menu_button.draw(screen):
+                self.started=False
+                self.main_ost.stop()
+                self.starting_ost.play(loops=-1)
+                self.restart()
     
     def run(self):
         self.visible_sprites.custom_draw(self.player) # draw world
         self.ui.display(self.player)
+        self.check_death(self.player.pos)
         #update and draw game
-        if self.game_paused:
+        if self.game_paused: # upgrade menu
             self.upgrade.display()
-            # display upgrade menu
-        elif self.paused:
+        elif self.paused: # pause screen
             self.pause()
+        elif self.stopped: # if game ends
+            pass
         else:
-            # run game
+            # run game normally
             self.visible_sprites.update() # update visible sprites on screen
             self.visible_sprites.enemy_update(self.player)
             self.player_attack_logic()
