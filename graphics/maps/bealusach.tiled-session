@@ -22,10 +22,15 @@
             "scaleInEditor": 1
         },
         "/Users/Aniket/Downloads/beal_map/castle house tiles.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "/Users/Aniket/Downloads/beal_map/faded 3200 16x16 map yucky.tsx": {
+            "dynamicWrapping": false
+        },
         "/Users/Aniket/Downloads/beal_map/ground tiles 32x32.tsx": {
+            "dynamicWrapping": true,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
@@ -42,6 +47,7 @@
             "scaleInEditor": 1
         },
         "/Users/Aniket/Downloads/beal_map/map tiles.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 0.3,
             "scaleInEditor": 0.7141
         },
@@ -76,7 +82,7 @@
             }
         }
     },
-    "last.exportedFilePath": "/Users/Aniket/Downloads/beal_map",
+    "last.exportedFilePath": "/Users/Aniket/Downloads/beal_map/output",
     "last.imagePath": "/Users/Aniket/Downloads",
     "map.height": 100,
     "map.lastUsedExportFilter": "CSV files (*.csv)",
