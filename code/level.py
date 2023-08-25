@@ -33,6 +33,7 @@ class Level:
         self.ypos=0
 
         self.mode=False # True for embedded map, more fps (30), False for individual tile implementation, less fps (25)
+        self.many_entities=False # True for more entities, lower fps?
 
         #attack sprites
         self.current_attack=None
@@ -99,6 +100,8 @@ class Level:
             'entities':import_csv_layout('../graphics/maps/beal_Entities.csv')
 
         }
+        if self.many_entities:
+            layout['entities']=import_csv_layout('../graphics/maps/alt beal_Entities.csv')
         graphics={
             'grass':import_folder('../graphics/grass'),
             'objects': import_folder('../graphics/objects')
@@ -126,16 +129,16 @@ class Level:
                                 Tile((x,y),[self.visible_sprites,self.obstacle_sprites],'object',surf,hit_id) # add surf for actual objects
 
                         if style=='entities':
-                            if col=='394':
+                            if col=='1014':
                                 self.player=Player(
                                                     (x,y),
                                                     [self.visible_sprites],self.obstacle_sprites,
                                                     self.create_attack,self.destroy_attack,
                                                     self.create_proj)
                             else: # check which enemy the entity that isnt player is
-                                if col=='390': monster_name='flying_eye'
-                                elif col=='391': monster_name='mushroom'
-                                elif col=='392': monster_name='skeleton'
+                                if col=='1': monster_name='flying_eye'
+                                elif col=='0': monster_name='mushroom'
+                                elif col=='2': monster_name='goblin'
                                 else: monster_name='skeleton'
                                 Enemy(monster_name,
                                       (x,y),
