@@ -11,10 +11,13 @@ class Enemy(Entity):
         self.sprite_type='enemy'
 
         # graphics
-        self.import_graphics(monster_name)
         self.status='idle'
+        self.import_graphics(monster_name)
+        self.left_animations=self.left_animation_import(monster_name)
         self.image=self.animations[self.status][self.frame_index].convert_alpha()
         self.rect=self.image.get_rect(topleft=pos)
+        self.pos=pos
+
 
         # enemy stats (dict from settings converted to attributes using monster_info)
         self.monster_name = monster_name
@@ -64,6 +67,12 @@ class Enemy(Entity):
         for animation in self.animations.keys():
             self.animations[animation]=import_folder(main_path+animation)
 
+    def left_animation_import(self,name):
+        main_path=f'../graphics/monsters/{name}/lmove/'
+        dog=import_folder(main_path)
+        return dog
+        
+
     def get_player_dist_dir(self,player):
         enemy_vector=pygame.math.Vector2(self.rect.center)
         player_vector=pygame.math.Vector2(player.rect.center)
@@ -102,13 +111,16 @@ class Enemy(Entity):
                 self.direction=pygame.math.Vector2((-1,0))
 
     def animate(self):
-        animation=self.animations[self.status]
+        animation=self.animations[self.status] if self.status!='idle' else self.animations['move']
+        if self.status=='move' or self.status=='idle':
+            if self.direction[0]<0: # if moving left, use function to import left moving images
+                animation=self.left_animations
+
         self.frame_index+=self.animation_speed # from entity inheritance
         if self.frame_index>=len(animation):
             if self.status=='attack':
                 self.can_attack=False
             self.frame_index=0
-
         self.image=animation[int(self.frame_index)]
         self.rect=self.image.get_rect(center=self.hitbox.center)
 
