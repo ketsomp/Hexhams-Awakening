@@ -27,7 +27,9 @@
             "scaleInEditor": 1
         },
         "/Users/Aniket/Downloads/beal_map/faded 3200 16x16 map yucky.tsx": {
-            "dynamicWrapping": false
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "/Users/Aniket/Downloads/beal_map/ground tiles 32x32.tsx": {
             "dynamicWrapping": true,
@@ -35,11 +37,11 @@
             "scaleInEditor": 1
         },
         "/Users/Aniket/Downloads/beal_map/main_map.tmx": {
-            "scale": 1.8631,
-            "selectedLayer": 4,
+            "scale": 0.6419,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 306.47844989533576,
-                "y": 1432.8270087488595
+                "x": 917.5884094095653,
+                "y": 723.6329646362361
             }
         },
         "/Users/Aniket/Downloads/beal_map/map tiles 64x64.tsx": {
@@ -60,8 +62,12 @@
             "scaleInDock": 0.3,
             "scaleInEditor": 0.8554
         },
-        "/Users/Aniket/Downloads/beal_map/proper tileset.tsx": {
+        "/Users/Aniket/Downloads/beal_map/monster tileset.tsx": {
             "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "/Users/Aniket/Downloads/beal_map/proper tileset.tsx": {
+            "scaleInDock": 0.6273,
             "scaleInEditor": 1
         },
         "/Users/Aniket/Downloads/beal_map/sand stump 32x32.tsx": {
@@ -100,12 +106,14 @@
         "/Users/Aniket/Downloads/beal_map/sand stump 32x32.tsx",
         "/Users/Aniket/Downloads/beal_map/castle house tiles.tsx",
         "/Users/Aniket/Downloads/beal_map/32x32 house castle.tsx",
-        "/Users/Aniket/Downloads/beal_map/ground tiles 32x32.tsx"
+        "/Users/Aniket/Downloads/beal_map/faded 3200 16x16 map yucky.tsx",
+        "/Users/Aniket/Downloads/beal_map/monster tileset.tsx"
     ],
     "project": "bealusach.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "/Users/Aniket/Downloads/beal_map/ground tiles 32x32.tsx",
+        "/Users/Aniket/Downloads/beal_map/monster tileset.tsx",
+        "/Users/Aniket/Downloads/beal_map/faded 3200 16x16 map yucky.tsx",
         "/Users/Aniket/Downloads/beal_map/32x32 house castle.tsx",
         "/Users/Aniket/Downloads/beal_map/castle house tiles.tsx",
         "/Users/Aniket/Downloads/beal_map/sand stump 32x32.tsx",
@@ -115,8 +123,7 @@
         "/Users/Aniket/Downloads/beal_map/map tiles.tsx",
         "/Users/Aniket/Downloads/beal_map/map_tileset.tsx",
         "/Users/Aniket/Downloads/beal_map/main_map.tmx",
-        "/Users/Aniket/Downloads/beal_map/map tiles 64x64.tsx",
-        "/Users/Aniket/Downloads/main_map.tsx"
+        "/Users/Aniket/Downloads/beal_map/ground tiles 32x32.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
