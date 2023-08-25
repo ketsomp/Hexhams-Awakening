@@ -135,7 +135,7 @@ class Player(Entity):
                     self.proj_index+=1
                 else:
                     self.proj_index=0
-                self.proj=list(weapon_data.keys())[self.proj_index]
+                self.proj=list(proj_data.keys())[self.proj_index]
 
             # sprinting
             if keys[pygame.K_LSHIFT] and self.stamina>0:
