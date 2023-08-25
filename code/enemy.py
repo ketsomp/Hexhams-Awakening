@@ -106,13 +106,11 @@ class Enemy(Entity):
         else:
             # idling side to side
             if self.can_move:
-                self.direction=pygame.math.Vector2((1,0))
-            else:
-                self.direction=pygame.math.Vector2((-1,0))
+                self.direction=pygame.math.Vector2()
 
     def animate(self):
-        animation=self.animations[self.status] if self.status!='idle' else self.animations['move']
-        if self.status=='move' or self.status=='idle':
+        animation=self.animations[self.status] #if self.status!='idle' else self.animations['move']
+        if self.status=='move':
             if self.direction[0]<0: # if moving left, use function to import left moving images
                 animation=self.left_animations
 
@@ -132,10 +130,10 @@ class Enemy(Entity):
 
     def cooldowns(self):
         current_time=pygame.time.get_ticks()
-        self.passive_movement_counter+=1
-        if self.passive_movement_counter>self.passive_movement_cd:
-            self.can_move=not self.can_move
-            self.passive_movement_counter=0
+        #self.passive_movement_counter+=1
+        #if self.passive_movement_counter>self.passive_movement_cd:
+        #    self.can_move=not self.can_move
+        #    self.passive_movement_counter=0
             
         if not self.can_attack:
             current_time=pygame.time.get_ticks()
