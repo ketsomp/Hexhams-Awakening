@@ -115,7 +115,7 @@ class Player(Entity):
 
                 self.create_proj(style,strength,cost)
 
-            if keys[pygame.K_q] and self.can_switch_weapon:
+            '''if keys[pygame.K_q] and self.can_switch_weapon:
                 self.can_switch_weapon=False
                 self.weapon_switch_cd=pygame.time.get_ticks()
 
@@ -124,7 +124,7 @@ class Player(Entity):
                     self.weapon_index+=1
                 else:
                     self.weapon_index=0
-                self.weapon=list(weapon_data.keys())[self.weapon_index]
+                self.weapon=list(weapon_data.keys())[self.weapon_index]'''
 
             if keys[pygame.K_e] and self.can_switch_proj:
                 self.can_switch_proj=False
@@ -170,9 +170,9 @@ class Player(Entity):
                 self.destroy_attack()
         
         # weapon switch cooldown
-        if not self.can_switch_weapon:
+        '''if not self.can_switch_weapon:
             if current_time-self.weapon_switch_cd>=self.switch_duration_cd:
-                self.can_switch_weapon=True
+                self.can_switch_weapon=True'''
 
         # projectile switch cooldown
         if not self.can_switch_proj:

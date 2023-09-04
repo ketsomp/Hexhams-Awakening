@@ -8,7 +8,7 @@ class Weapon(pygame.sprite.Sprite):
 
         # graphic
         full_path=f"../graphics/weapons/{player.weapon}/{direction}.png"
-        self.image=pygame.image.load(full_path).convert_alpha()
+        self.image=pygame.Surface([10, 10], pygame.SRCALPHA, 32) #pygame.image.load(full_path).convert_alpha()
 
         #placement wrt player (on player)
         if direction=='right':
