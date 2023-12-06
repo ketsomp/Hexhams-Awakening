@@ -6,8 +6,13 @@ Hexham's Awakening is an RPG game where the player moves around a large map figh
 The game was built over the span of a month primarily using Clear Code's Legend of Zelda as a base and building upon it extensively.
 
 In addition to advanced gameplay mechanics such as projectile magic, healing, sprinting and more, it also boasts a huge 100x100 map filled with villages, a town, forests and rivers. There are over 110 different tiles used in the map. The map data is stored in multiple csv files.
+
+
 Leveling up in the game is done from the level up menu, using experience gained from defeating monsters. Many different abilties can be leveled up such as combat, stamina and magic. 
+
+
 There are four different enemies to beat, the skeleton, the goblin, the mushroom and the flying eye. Each come with their own animations for different actions like death, movement and combat, similar to the player's animations.
+
 
 Throughout the game, 2 soundtracks play, one for the splash screen seen when booting up the game and one heard while playing the game. 
 
@@ -21,11 +26,25 @@ Throughout the game, 2 soundtracks play, one for the splash screen seen when boo
 <img width="1392" alt="Screen Shot 2023-12-06 at 9 28 51 AM" src="https://github.com/ketsomp/Hexhams-Awakening/assets/66839991/edf92d18-14b0-40b5-ac58-1bd3d3616029">
 
 Bibliography:\n
-[Clear Code](https://youtu.be/QU1pPzEGrqw?si=76rss1u7C7qCOsZr)\n
-[Main Character](https://szadiart.itch.io/rpg-main-character)\n
-[Enemies](https://luizmelo.itch.io/monsters-creatures-fantasy)\n
-[OST](https://www.youtube.com/watch?v=lf3_tmujfqc)\n
-[Map](https://merchant-shade.itch.io/16x16-mini-world-sprites)\n
-[Buttons](https://www.freepik.com/free-vector/wooden-buttons-with-gold-silver-frames_27846294.htm)\n
-[Logo Font](https://www.dafont.com/magnific-chaos.font)\n
+[Clear Code](https://youtu.be/QU1pPzEGrqw?si=76rss1u7C7qCOsZr)
+
+
+[Main Character](https://szadiart.itch.io/rpg-main-character)
+
+
+[Enemies](https://luizmelo.itch.io/monsters-creatures-fantasy)
+
+
+[OST](https://www.youtube.com/watch?v=lf3_tmujfqc)
+
+
+[Map](https://merchant-shade.itch.io/16x16-mini-world-sprites)
+
+
+[Buttons](https://www.freepik.com/free-vector/wooden-buttons-with-gold-silver-frames_27846294.htm)
+
+
+[Logo Font](https://www.dafont.com/magnific-chaos.font)
+
+
 [Image Outline](https://stackoverflow.com/a/71439893/22393376)
