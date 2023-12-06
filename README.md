@@ -25,7 +25,8 @@ Throughout the game, 2 soundtracks play, one for the splash screen seen when boo
 <img width="1392" alt="Screen Shot 2023-12-06 at 9 09 32 AM" src="https://github.com/ketsomp/Hexhams-Awakening/assets/66839991/adff3d6c-6fc6-4c6f-b50b-867f8d8b7c82">
 <img width="1392" alt="Screen Shot 2023-12-06 at 9 28 51 AM" src="https://github.com/ketsomp/Hexhams-Awakening/assets/66839991/edf92d18-14b0-40b5-ac58-1bd3d3616029">
 
-Bibliography:\n
+Bibliography:
+
 [Clear Code](https://youtu.be/QU1pPzEGrqw?si=76rss1u7C7qCOsZr)
 
 
